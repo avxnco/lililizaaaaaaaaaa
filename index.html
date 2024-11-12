@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Bunny Liz</title>
+    <!-- Link to Tangerine font -->
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('Untitled design (4).png'); /* Use uploaded background image */
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .phrase-container {
+            position: absolute;
+            top: 58%;  /* Adjust this to fine-tune vertical alignment */
+            left: 43%;
+            transform: translate(-50%, -50%);
+            width: 70%; /* Width to fit inside the frame */
+            max-width: 425px;
+            background: rgba(255, 255, 255, 0); /* Transparent */
+            padding: 0px;
+            border-radius: 0px;
+        }  
+        h1 {
+            font-family: 'Tangerine', cursive;
+            font-size: 3em; /* Adjusted for the frame */
+            color: #333; /* Text color that complements background */
+            margin: 0;
+        }
+        p {
+            font-family: 'Tangerine', cursive;
+            font-size: 2em; /* Adjusted for readability */
+            color: #333;
+            margin: 0;
+        }
+    
+        /* Style for the button container */
+        .button-container {
+            margin-top: 20px;
+        }
+        .link-button {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            background-image: url('button.png'); /* Set your icon image */
+            background-size: contain;
+            background-repeat: no-repeat;
+            text-decoration: none;
+            color: transparent; /* Hides link text, only showing the icon */
+        }
+    </style>
+</head>
+<body>
+    <div class="phrase-container">
+        <h1>hi ?¿ Liz</h1>
+        <p id="dailyPhrase"></p>
+        <div class="button-container">
+            <a id="dailyLink" href="#" target="_blank" class="link-button"></a>
+        </div>
+    </div>
+
+    <script>
+        const phrases = [
+            "Hi cutie, 22 wow! Congratulations my love. While I love to use this day to say all the nicest things I think of you, somehow this is not enough. To the kindest, smartest, most empathetic, beautiful, ambitious and talented person I know, I wish to find everything your heart is looking for, every day of this next year. This is day 1! Visit this website for the next 365 days for a mood boost, a little guidance or inspiration (The icon below the text is clickable and has content!). Always sincerely urs <3 - ania",
+            "Open your soul as wide as your eyes today. Hug your friend.",
+            "Being careless is hard sometimes, yet so crucial. Eat a girl dinner tonight.",
+            "Do not forget you are a part of a great world's beauty. Take a pic of something pretty. You count as well.",
+            "You are as grounded as the rich soils of your homeland. Listen to your favourite folk song today.",
+            "Your body is a vessel. Nourishing the mind means loving the vessel it's held by. Find a couple moments for yoga today.",
+            "Take time to find the balance between pushing to the limits and being kind to yourself. Like a river, flow strongly and vigorously, wash out the shores, without overflowing.",
+            "Curiosity is the virtue of the young heart. Seek out new knowledge/meaning today.",
+            "Where is your spirit trapped? Is it trapped in the mountain? Is it enchanted in some waterfall? If you search, you will find the lost spirit.",
+            "You are the anarchy, you are the order, you are the midnight sun and stars of the dawn. You can laugh and scream!",
+            "The eye of the world is watching you. It is the same eye with which you are watching the world. This eye is neither cheerful nor evil. It is indifferent like water.",
+            "There is meaning in the dirt. Today is the day to touch the bark of the trees.", 
+            "Everything I've ever let go of has claw marks on it. Cherish what has gone by. Listen to Hard Drive if you feel like it.",
+            "If unsure today, ask the cards. The queen of pentacles demands a big grin.",
+            "Listen, tree, are you alone here? - asked the cat. Never, said the tree. Try to see a cat today.",
+            "The feeling at the deepest end of your heart matters. Rip it out and put it on the table in front of you. Alternatively, put it under your pillow and dream of a rabbit who explains it to you.",
+            "Destruction is a form of creation. Get rid of something that does not serve you anymore.",
+            "1st of December."
+        ];
+
+        const urls = [
+            "https://youtu.be/ekOqTVis968?si=dW3I-qPgH2iLWUEj",  // URL for day 1
+            "https://open.spotify.com/album/7yvneKZjwqLZIvc2JcqGU0?si=Y7Pv4bTKSCCbG6R56HvVbA",  // URL for day 2
+            "https://ex-fs.net/film/60091-kitayanka.html",
+            "https://www.youtube.com/watch?v=hnP6WzL0cRE",
+            "https://phroomplatform.com/ana-mendieta/",
+            "https://youtu.be/3vq6Ot2RiEc?si=TBzJitRnLZEEzGnU",
+            "https://youtu.be/BQONBiHu2nM?si=yJNxBhQTsBcw6Tcq",
+            "https://ubu.com/papers/noise.html",
+            "https://ubu.com/aspen/aspen9/index.html",
+            "https://vk.com/video-4569_456245437",
+            "https://evergreenreview.com/",
+            "https://aporee.org/maps/work/projects.php",
+            "https://open.spotify.com/album/5fjKbBCaeXmT4Drv0pY6hX?si=y3PFFWJvQMKB0fCB1rYFeQ",
+            "https://youtu.be/45_tO1R_L4A?si=51Uf66S9bxqylxmn",
+            "https://youtu.be/rU0FcD3J5Zw?si=AORdFFKqz3uhOWsv",
+            "https://vk.com/video-39165340_456240591",
+            "https://www.ubu.com/film/weiss.html"  // URL for day 3
+            // Add up to 365 URLs here, one for each day
+        ];
+
+        const startDate = new Date("2024-11-3"); // Friend’s birthday
+        const today = new Date();
+        const dayNumber = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+
+        const phraseElement = document.getElementById("dailyPhrase");
+        const dailyLink = document.getElementById("dailyLink");
+
+        if (dayNumber >= 0 && dayNumber < phrases.length) {
+            phraseElement.textContent = phrases[dayNumber];
+            dailyLink.href = urls[dayNumber] || "#"; // Use a placeholder if no URL is provided
+        } else {
+            phraseElement.textContent = "Let the journey take you further, into the light. Love will prevail and I will be endlessly grateful for a human being by my side that is you.";
+            dailyLink.style.display = "none"; // Hide button if no URL is available
+        }
+    </script>
+</body>
+</html>
